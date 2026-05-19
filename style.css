@@ -32,5 +32,4 @@ textarea{min-height:120px;}
   .menu-toggle{display:block;}
   .links{display:none;flex-direction:column;position:fixed;top:56px;right:0;padding:24px;gap:20px;z-index:998;}
   .links.open{display:flex;}
-  section{padding:56px 24px 80px 24px;}
 }
