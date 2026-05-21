@@ -1,35 +1,209 @@
-*{box-sizing:border-box;margin:0;padding:0;color-scheme:light;}
-html{scroll-behavior:smooth;}
-body{background:#F5F2EC;font-family:'DM Mono',monospace;overflow-x:hidden;}
+/* ─── Reset ─────────────────────────────────────────────────────────────── */
 
-#c{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color-scheme: light;
+}
 
-nav{position:fixed;top:0;left:0;right:0;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;z-index:999;}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.2em;text-decoration:none;}
-.links{display:flex;gap:32px;list-style:none;}
-.links a{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;}
-.menu-toggle{display:none;background:none;border:none;cursor:pointer;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;}
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
 
-section{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:56px 48px 80px 15vw;}
+body {
+  background: #F5F2EC;
+  font-family: 'DM Mono', monospace;
+  overflow-x: hidden;
+}
 
-.s2,.s3,.s4,.s5{justify-content:center;align-items:flex-start;}
 
-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,11vw,120px);letter-spacing:.03em;line-height:.9;}
-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,72px);letter-spacing:.05em;line-height:1;margin-bottom:24px;}
-p{font-family:'DM Mono',monospace;font-size:14px;line-height:1.8;opacity:.6;max-width:480px;}
-.red{color:#CC1C1C;}
-small{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.35;margin-bottom:32px;display:block;}
+/* ─── Canvas ─────────────────────────────────────────────────────────────── */
 
-.hint{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.35;z-index:999;}
+#c {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
 
-form{display:flex;flex-direction:column;gap:24px;max-width:480px;margin-top:40px;}
-input,textarea{background:none;border:none;border-bottom:1px solid currentColor;padding:8px 0;font-family:'DM Mono',monospace;font-size:14px;outline:none;color:inherit;opacity:.8;resize:none;width:100%;}
-textarea{min-height:120px;}
-.btn-send{align-self:flex-start;background:none;border:1px solid currentColor;padding:12px 40px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;color:inherit;}
 
-@media(max-width:768px){
-  nav{padding:0 24px;}
-  .menu-toggle{display:block;}
-  .links{display:none;flex-direction:column;position:fixed;top:56px;right:0;padding:24px;gap:20px;z-index:998;}
-  .links.open{display:flex;}
+/* ─── Nav ────────────────────────────────────────────────────────────────── */
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15vw;
+  z-index: 999;
+}
+
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: .2em;
+  text-decoration: none;
+}
+
+.links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+
+/* ─── Sections ───────────────────────────────────────────────────────────── */
+
+section {
+  position: relative;
+  z-index: 10;
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 56px 15vw 80px 15vw;
+  scroll-snap-align: start;
+}
+
+.s2, .s3, .s4, .s5 {
+  justify-content: center;
+  align-items: flex-start;
+}
+
+
+/* ─── Typography ─────────────────────────────────────────────────────────── */
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 11vw, 120px);
+  letter-spacing: .03em;
+  line-height: .9;
+}
+
+h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 6vw, 72px);
+  letter-spacing: .05em;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+
+p {
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  line-height: 1.8;
+  opacity: .6;
+  max-width: 480px;
+}
+
+small {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  opacity: .35;
+  margin-bottom: 32px;
+  display: block;
+}
+
+.red  { color: #CC1C1C; }
+.hint {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: .35;
+  z-index: 999;
+}
+
+
+/* ─── Contact form ───────────────────────────────────────────────────────── */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 480px;
+  margin-top: 40px;
+}
+
+input,
+textarea {
+  background: none;
+  border: none;
+  border-bottom: 1px solid currentColor;
+  padding: 8px 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  outline: none;
+  color: inherit;
+  opacity: .8;
+  resize: none;
+  width: 100%;
+}
+
+textarea { min-height: 120px; }
+
+.btn-send {
+  align-self: flex-start;
+  background: none;
+  border: 1px solid currentColor;
+  padding: 12px 40px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: inherit;
+}
+
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  nav { padding: 0 24px; }
+
+  .menu-toggle { display: block; }
+
+  .links {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 56px; right: 0;
+    padding: 24px;
+    gap: 20px;
+    z-index: 998;
+  }
+
+  .links.open { display: flex; }
 }

@@ -56,14 +56,15 @@ function draw() {
   }
 
   const vw = W * .05;
+  const vAlpha = p * .5;
   const lg = ctx.createLinearGradient(0, 0, vw, 0);
-  lg.addColorStop(0, `rgba(13,13,13,${.5 - p * .2})`);
+  lg.addColorStop(0, `rgba(13,13,13,${vAlpha})`);
   lg.addColorStop(1, 'rgba(13,13,13,0)');
   ctx.fillStyle = lg;
   ctx.fillRect(0, 0, vw, H);
 
   const rg = ctx.createLinearGradient(W, 0, W - vw, 0);
-  rg.addColorStop(0, `rgba(13,13,13,${.5 - p * .2})`);
+  rg.addColorStop(0, `rgba(13,13,13,${vAlpha})`);
   rg.addColorStop(1, 'rgba(13,13,13,0)');
   ctx.fillStyle = rg;
   ctx.fillRect(W - vw, 0, vw, H);
