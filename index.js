@@ -4,6 +4,7 @@ const nav = document.getElementById('nav');
 const logo = document.getElementById('logo');
 const hint = document.getElementById('hint');
 const textEls = document.querySelectorAll('h1, h2, p, small, a, input, textarea, .btn-send, .menu-toggle');
+const sections = document.querySelectorAll('section');
 
 document.getElementById('menu-toggle').addEventListener('click', () => {
   document.getElementById('links').classList.toggle('open');
@@ -71,6 +72,9 @@ function draw() {
 
   const col = p < .5 ? '#F5F2EC' : '#0D0D0D';
   textEls.forEach(el => { if (!el.classList.contains('red')) el.style.color = col; });
+
+  const bgAlpha = Math.max(0, (p - 0.5) * 2);
+  sections.forEach(s => { s.style.background = `rgba(245,242,236,${bgAlpha})`; });
 
   requestAnimationFrame(draw);
 }
