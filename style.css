@@ -203,6 +203,19 @@ textarea {
   width: 100%;
 }
 
+.reserve-link {
+  display: none;
+  border: 1px solid currentColor;
+  padding: 12px 40px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+  margin-top: 40px;
+}
+
 .reserve-inner > div:nth-child(2) {
   width: 74%;
 }
@@ -211,27 +224,32 @@ textarea {
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
-  nav {
-    padding: 0 24px;
-  }
-
   .menu-toggle {
     display: block;
   }
 
   .links {
-    display: none;
+    display: flex;
     flex-direction: column;
     position: fixed;
     top: 56px;
+    left: 0;
     right: 0;
-    padding: 24px;
+    padding: 0 15vw;
     gap: 20px;
     z-index: 998;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
   }
 
   .links.open {
-    display: flex;
+    max-height: 300px;
+    opacity: 1;
+    pointer-events: auto;
+    padding: 24px 15vw;
   }
 
   .reserve-inner {
@@ -242,4 +260,7 @@ textarea {
   .reserve-inner > div:nth-child(2) {
     width: 100%;
   }
+
+  .widget-wrap { display: none; }
+  .reserve-link { display: inline-block; }
 }
