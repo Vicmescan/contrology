@@ -13,29 +13,30 @@ html {
 }
 
 body {
-  background: #F5F2EC80;
-  font-family: 'DM Mono', monospace;
+  background: #f5f2ec80;
+  font-family: "DM Mono", monospace;
   overflow-x: hidden;
 }
-
 
 /* ─── Canvas ─────────────────────────────────────────────────────────────── */
 
 #c {
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   z-index: 0;
   pointer-events: none;
 }
 
-
 /* ─── Nav ────────────────────────────────────────────────────────────────── */
 
 nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 56px;
   display: flex;
   align-items: center;
@@ -45,9 +46,9 @@ nav {
 }
 
 .logo {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   font-size: 13px;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
   text-decoration: none;
 }
 
@@ -58,9 +59,9 @@ nav {
 }
 
 .links a {
-  font-family: 'DM Mono', monospace;
+  font-family: "DM Mono", monospace;
   font-size: 11px;
-  letter-spacing: .15em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
 }
@@ -70,12 +71,11 @@ nav {
   background: none;
   border: none;
   cursor: pointer;
-  font-family: 'DM Mono', monospace;
+  font-family: "DM Mono", monospace;
   font-size: 11px;
-  letter-spacing: .15em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
-
 
 /* ─── Sections ───────────────────────────────────────────────────────────── */
 
@@ -91,61 +91,64 @@ section {
   scroll-snap-align: start;
 }
 
-.s2, .s3, .s4, .s5 {
+.s2,
+.s3,
+.s4,
+.s5 {
   justify-content: center;
   align-items: flex-start;
 }
 
-
 /* ─── Typography ─────────────────────────────────────────────────────────── */
 
 h1 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   font-size: clamp(56px, 11vw, 120px);
-  letter-spacing: .03em;
-  line-height: .9;
+  letter-spacing: 0.03em;
+  line-height: 0.9;
 }
 
 h2 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   font-size: clamp(36px, 6vw, 72px);
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
   line-height: 1;
   margin-bottom: 24px;
 }
 
 p {
-  font-family: 'DM Mono', monospace;
+  font-family: "DM Mono", monospace;
   font-size: 14px;
   line-height: 1.8;
-  opacity: .6;
+  opacity: 0.6;
   max-width: 480px;
 }
 
 small {
-  font-family: 'DM Mono', monospace;
+  font-family: "DM Mono", monospace;
   font-size: 11px;
-  letter-spacing: .15em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  opacity: .35;
+  opacity: 0.35;
   margin-bottom: 32px;
   display: block;
 }
 
-.red  { color: #CC1C1C; }
+.red {
+  color: #cc1c1c;
+}
 .hint {
   position: fixed;
   bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'DM Mono', monospace;
+  font-family: "DM Mono", monospace;
   font-size: 10px;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  opacity: .35;
+  opacity: 0.35;
   z-index: 999;
 }
-
 
 /* ─── Contact form ───────────────────────────────────────────────────────── */
 
@@ -163,47 +166,80 @@ textarea {
   border: none;
   border-bottom: 1px solid currentColor;
   padding: 8px 0;
-  font-family: 'DM Mono', monospace;
+  font-family: "DM Mono", monospace;
   font-size: 14px;
   outline: none;
   color: inherit;
-  opacity: .8;
+  opacity: 0.8;
   resize: none;
   width: 100%;
 }
 
-textarea { min-height: 120px; }
+textarea {
+  min-height: 120px;
+}
 
 .btn-send {
   align-self: flex-start;
   background: none;
   border: 1px solid currentColor;
   padding: 12px 40px;
-  font-family: 'DM Mono', monospace;
+  font-family: "DM Mono", monospace;
   font-size: 11px;
-  letter-spacing: .15em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   cursor: pointer;
   color: inherit;
 }
 
 
+/* ─── Reserve ────────────────────────────────────────────────────────────── */
+
+.reserve-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 80px;
+  width: 100%;
+}
+
+.reserve-inner > div:nth-child(2) {
+  width: 74%;
+}
+
+
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
-  nav { padding: 0 24px; }
+  nav {
+    padding: 0 24px;
+  }
 
-  .menu-toggle { display: block; }
+  .menu-toggle {
+    display: block;
+  }
 
   .links {
     display: none;
     flex-direction: column;
     position: fixed;
-    top: 56px; right: 0;
+    top: 56px;
+    right: 0;
     padding: 24px;
     gap: 20px;
     z-index: 998;
   }
 
-  .links.open { display: flex; }
+  .links.open {
+    display: flex;
+  }
+
+  .reserve-inner {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .reserve-inner > div:nth-child(2) {
+    width: 100%;
+  }
 }
