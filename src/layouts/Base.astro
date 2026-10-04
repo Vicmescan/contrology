@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+import { url } from '../url';
+
+interface Props {
+  title: string;
+  description: string;
+  ogType?: string;
+  bodyClass?: string;
+}
+
+const { title, description, ogType = 'website', bodyClass } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+
+const nav = [
+  ['Home', ''],
+  ['Reserve', 'reserve/'],
+  ['Apprentice', 'apprentice/'],
+  ['Journal', 'blog/'],
+  ['Contact', 'contact/'],
+];
+// Sección actual: la primera parte de la ruta sin el base (las entradas del blog marcan Journal).
+const section = Astro.url.pathname.slice(import.meta.env.BASE_URL.replace(/\/$/, '').length).split('/')[1] ?? '';
+const current = nav.find(([, path]) => path.replace('/', '') === section)?.[1];
+---
+<!DOCTYPE html>
+<html lang="en" style="color-scheme:light only;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+
+<title>{title}</title>
+<meta name="description" content={description}>
+
+<meta property="og:type" content={ogType}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:locale" content="en_DE">
+
+<link rel="canonical" href={canonical}>
+
+<slot name="head" />
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
+</head>
+<body class={bodyClass}>
+
+<header><nav id="nav">
+  <a href={url()} class="logo" id="logo">CONTROLOGY STUDIO BERLIN</a>
+  <button class="menu-toggle" id="menu-toggle">MENU</button>
+  <ul class="links" id="links">
+    {nav.map(([label, path]) => (
+      <li><a href={url(path)} aria-current={current === path ? 'page' : undefined}>{label}</a></li>
+    ))}
+  </ul>
+</nav></header>
+
+<slot />
+
+<footer class="site-footer">
+  <p>© {new Date().getFullYear()} - Contrology Studio | Berlin</p>
+  <p><a href="https://maps.app.goo.gl/AjchAVy9rVySz3SA9" title="Show Contrology Studio | Berlin on Google Maps" target="_blank" rel="noopener">Erkelenzdamm 7 | 10999 Berlin</a></p>
+  <p>
+    <a href="tel:+491757799559">+491757799559</a>
+    <a href="mailto:pep@contrologystudio.berlin">pep@contrologystudio.berlin</a>
+    <a href="https://www.instagram.com/contrologystudio.berlin/" target="_blank" rel="noopener">Instagram</a>
+  </p>
+  <p>
+    <a href={url('footer-menu/privacy/')}>Privacy</a>
+    <a href={url('footer-menu/imprint/')}>Imprint</a>
+  </p>
+</footer>
+
+<script>
+  document.getElementById('menu-toggle')!.addEventListener('click', () => {
+    document.getElementById('links')!.classList.toggle('open');
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import '../../styles/blog.css';
+import { getPosts, formatDate } from '../../blog';
+import { url } from '../../url';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<Base
+  title={`${post.data.title} — Contrology Studio Berlin`}
+  description={post.data.description ?? post.data.title}
+  ogType="article"
+  bodyClass="blog"
+>
+<main>
+  <article>
+    <header class="post-header">
+      <small><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time></small>
+      <h1>{post.data.title}</h1>
+    </header>
+
+    {post.data.cover && <img class="post-cover" src={post.data.cover} alt="" />}
+
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  <a class="back" href={url('blog/')}>← All entries</a>
+</main>
+</Base>

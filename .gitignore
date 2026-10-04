@@ -1,1 +1,4 @@
 To-Do.md
+node_modules/
+dist/
+.astro/

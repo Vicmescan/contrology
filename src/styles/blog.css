@@ -1,0 +1,131 @@
+/* Diseño provisional del Journal: fondo crema, texto negro, misma tipografía que la portada. */
+
+body.blog {
+  background: #f5f2ec;
+  color: #0d0d0d;
+}
+
+body.blog a {
+  color: inherit;
+}
+
+body.blog nav,
+body.blog .links.open {
+  background: #f5f2ec;
+}
+
+.blog main {
+  padding: 140px 15vw 120px;
+}
+
+/* ─── Listado ────────────────────────────────────────────────────────────── */
+
+.post-list {
+  list-style: none;
+  margin-top: 80px;
+  border-top: 1px solid currentColor;
+}
+
+.post-list li {
+  border-bottom: 1px solid currentColor;
+}
+
+.post-list a {
+  display: block;
+  padding: 40px 0;
+  text-decoration: none;
+}
+
+.post-list a:hover h2 {
+  color: #cc1c1c;
+}
+
+.post-list small {
+  margin-bottom: 16px;
+}
+
+.post-list h2 {
+  margin-bottom: 12px;
+}
+
+.empty {
+  margin-top: 80px;
+}
+
+/* ─── Entrada ────────────────────────────────────────────────────────────── */
+
+.post-header {
+  max-width: 900px;
+  margin-bottom: 64px;
+}
+
+.post-header h1 {
+  font-size: clamp(48px, 8vw, 96px);
+}
+
+.post-cover {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 64px;
+}
+
+.prose {
+  max-width: 680px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.prose > * + * {
+  margin-top: 1.4em;
+}
+
+.prose p {
+  font-size: inherit;
+  opacity: 0.8;
+  max-width: none;
+}
+
+.prose h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  margin: 2em 0 0;
+}
+
+.prose h3 {
+  font-family: "DM Mono", monospace;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 2.4em;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4em;
+  opacity: 0.8;
+}
+
+.prose blockquote {
+  border-left: 2px solid #cc1c1c;
+  padding-left: 24px;
+  font-style: italic;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+.prose a {
+  text-decoration-color: #cc1c1c;
+  text-underline-offset: 3px;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 96px;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+}

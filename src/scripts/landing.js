@@ -6,10 +6,6 @@ const hint = document.getElementById('hint');
 const textEls = document.querySelectorAll('h1, h2, p, small, a, input, textarea, .btn-send, .menu-toggle');
 const sections = document.querySelectorAll('section');
 
-document.getElementById('menu-toggle').addEventListener('click', () => {
-  document.getElementById('links').classList.toggle('open');
-});
-
 let W, H, totalH, sp = 0, tp = 0;
 
 function resize() {

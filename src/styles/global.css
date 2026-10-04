@@ -7,27 +7,14 @@
   color-scheme: light;
 }
 
-html {
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
-}
-
 body {
-  background: #f5f2ec80;
   font-family: "DM Mono", monospace;
   overflow-x: hidden;
-}
-
-/* ─── Canvas ─────────────────────────────────────────────────────────────── */
-
-#c {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  pointer-events: none;
+  /* Footer pegado abajo aunque la página tenga poco contenido. */
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ─── Nav ────────────────────────────────────────────────────────────────── */
@@ -66,6 +53,11 @@ nav {
   text-decoration: none;
 }
 
+.links a[aria-current="page"] {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .menu-toggle {
   display: none;
   background: none;
@@ -75,28 +67,6 @@ nav {
   font-size: 11px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-}
-
-/* ─── Sections ───────────────────────────────────────────────────────────── */
-
-section {
-  position: relative;
-  z-index: 10;
-  height: 100vh;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 56px 15vw 80px 15vw;
-  scroll-snap-align: start;
-}
-
-.s2,
-.s3,
-.s4,
-.s5 {
-  justify-content: center;
-  align-items: flex-start;
 }
 
 /* ─── Typography ─────────────────────────────────────────────────────────── */
@@ -137,89 +107,43 @@ small {
 .red {
   color: #cc1c1c;
 }
-.hint {
-  position: fixed;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: "DM Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.35;
-  z-index: 999;
-}
 
-/* ─── Contact form ───────────────────────────────────────────────────────── */
+/* ─── Footer ─────────────────────────────────────────────────────────────── */
 
-form {
+.site-footer {
+  position: relative;
+  z-index: 10;
+  background: #f5f2ec;
+  color: #0d0d0d;
+  padding: 32px 15vw;
   display: flex;
-  flex-direction: column;
-  gap: 24px;
-  max-width: 480px;
-  margin-top: 40px;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  scroll-snap-align: end;
+  margin-top: auto;
 }
 
-input,
-textarea {
-  background: none;
-  border: none;
-  border-bottom: 1px solid currentColor;
-  padding: 8px 0;
-  font-family: "DM Mono", monospace;
-  font-size: 14px;
-  outline: none;
-  color: inherit;
-  opacity: 0.8;
-  resize: none;
-  width: 100%;
-}
-
-textarea {
-  min-height: 120px;
-}
-
-.btn-send {
-  align-self: flex-start;
-  background: none;
-  border: 1px solid currentColor;
-  padding: 12px 40px;
-  font-family: "DM Mono", monospace;
+.site-footer p {
   font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  cursor: pointer;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+  max-width: none;
+}
+
+.site-footer p > a + a::before {
+  content: "·";
+  margin: 0 0.6em;
+  display: inline-block;
+}
+
+.site-footer a {
   color: inherit;
-}
-
-
-/* ─── Reserve ────────────────────────────────────────────────────────────── */
-
-.reserve-inner {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 80px;
-  width: 100%;
-}
-
-.reserve-link {
-  display: none;
-  border: 1px solid currentColor;
-  padding: 12px 40px;
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  letter-spacing: .15em;
-  text-transform: uppercase;
   text-decoration: none;
-  color: inherit;
-  margin-top: 40px;
 }
 
-.reserve-inner > div:nth-child(2) {
-  width: 74%;
+.site-footer a:hover {
+  text-decoration: underline;
 }
-
 
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
 
@@ -251,16 +175,4 @@ textarea {
     pointer-events: auto;
     padding: 24px 15vw;
   }
-
-  .reserve-inner {
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .reserve-inner > div:nth-child(2) {
-    width: 100%;
-  }
-
-  .widget-wrap { display: none; }
-  .reserve-link { display: inline-block; }
 }

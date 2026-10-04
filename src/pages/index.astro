@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/landing.css';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ExerciseGym',
+  name: 'Contrology Studio Berlin',
+  description: 'Classical Pilates apparatus studio in Kreuzberg, Berlin. Small groups, progressive sequence. Not a workout — a practice.',
+  url: new URL(import.meta.env.BASE_URL, Astro.site).href,
+  telephone: '+491757799559',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Erkelenzdamm 7, Hinterhof, 2. OG Links',
+    addressLocality: 'Berlin',
+    postalCode: '10999',
+    addressCountry: 'DE',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 52.5009728,
+    longitude: 13.4155331,
+  },
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Monday',    opens: '14:00', closes: '20:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Tuesday',   opens: '08:00', closes: '20:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Wednesday', opens: '08:00', closes: '20:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Thursday',  opens: '08:00', closes: '20:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Friday',    opens: '08:00', closes: '19:30' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday',  opens: '09:00', closes: '12:00' },
+  ],
+  amenityFeature: [
+    { '@type': 'LocationFeatureSpecification', name: 'LGBTQ+ Friendly', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Women-owned', value: true },
+  ],
+};
+---
+<Base
+  title="Contrology Studio Berlin — Classical Pilates Kreuzberg"
+  description="Classical Pilates apparatus studio in Kreuzberg, Berlin. Small groups, progressive sequence. Not a workout — a practice."
+>
+<Fragment slot="head">
+<meta name="keywords" content="Contrology, classical Pilates, Kreuzberg, Berlin, apparatus, Pilates studio Berlin">
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</Fragment>
+
+<canvas id="c"></canvas>
+
+<div class="hint" id="hint">scroll ↓</div>
+
+<!-- HERO -->
+<section>
+  <h1 id="h1">THIS IS A<br>PLACE TO<br>PRACTICE.</h1>
+  <p id="sub" style="margin-top:32px;">Kreuzberg · Berlin</p>
+</section>
+
+<!-- STATEMENT -->
+<section style="justify-content:center;align-items:center;text-align:center;">
+  <h1 id="h2">NOT A WORKOUT.</h1>
+  <h1 class="red">NOT FOR EVERYONE.</h1>
+</section>
+
+<!-- PRACTICE -->
+<section class="s2" id="s2">
+  <small>Practice — Contrology</small>
+  <h2>We refine.<br>We don't reinvent.</h2>
+  <p>Classical apparatus. Small groups.<br>Progressive sequence.</p>
+</section>
+
+<script>
+  import '../scripts/landing.js';
+</script>
+</Base>

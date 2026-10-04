@@ -1,0 +1,25 @@
+---
+// Layout de las páginas legales (Privacy, Imprint): mismo diseño que una entrada del Journal.
+import Base from './Base.astro';
+import '../styles/blog.css';
+
+const { frontmatter } = Astro.props;
+---
+<Base
+  title={`${frontmatter.title} — Contrology Studio Berlin`}
+  description={frontmatter.description}
+  bodyClass="blog"
+>
+<main>
+  <article>
+    <header class="post-header">
+      <small>Contrology Studio | Berlin</small>
+      <h1>{frontmatter.title}</h1>
+    </header>
+
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</main>
+</Base>
