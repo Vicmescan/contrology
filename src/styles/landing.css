@@ -35,6 +35,11 @@ section {
   scroll-snap-align: start;
 }
 
+/* La portada mantiene sus titulares grandes */
+section h1 {
+  font-size: var(--fs-display);
+}
+
 .s2 {
   justify-content: center;
   align-items: flex-start;
@@ -46,7 +51,7 @@ section {
   left: 50%;
   transform: translateX(-50%);
   font-family: "DM Mono", monospace;
-  font-size: 10px;
+  font-size: var(--fs-micro);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0.35;

@@ -2,3 +2,11 @@ To-Do.md
 node_modules/
 dist/
 .astro/
+.env
+
+# Generado desde WordPress en cada build
+src/content/blog/wp-*.md
+public/images/wp/
+
+# WordPress local
+cms/.env

@@ -6,14 +6,6 @@ main h1 + p {
   margin-top: 32px;
 }
 
-/* Contenido centrado en altura entre el menú y el footer. */
-main.centered {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 /* ─── Contact form ───────────────────────────────────────────────────────── */
 
 form {
@@ -31,7 +23,7 @@ textarea {
   border-bottom: 1px solid currentColor;
   padding: 8px 0;
   font-family: "DM Mono", monospace;
-  font-size: 14px;
+  font-size: var(--fs-body);
   outline: none;
   color: inherit;
   opacity: 0.8;
@@ -49,7 +41,7 @@ textarea {
   border: 1px solid currentColor;
   padding: 12px 40px;
   font-family: "DM Mono", monospace;
-  font-size: 11px;
+  font-size: var(--fs-label);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   cursor: pointer;
@@ -59,18 +51,12 @@ textarea {
 
 /* ─── Reserve ────────────────────────────────────────────────────────────── */
 
+/* Texto a la izquierda y calendario a la derecha, alineados arriba como el resto de páginas. */
 .reserve-inner {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); /* derecha = doble que la izquierda */
+  align-items: start;
   gap: 80px;
-  width: 100%;
-}
-
-.reserve-inner h1 {
-  font-size: clamp(36px, 6vw, 72px);
-  letter-spacing: 0.05em;
-  line-height: 1;
 }
 
 .reserve-link {
@@ -78,16 +64,12 @@ textarea {
   border: 1px solid currentColor;
   padding: 12px 40px;
   font-family: 'DM Mono', monospace;
-  font-size: 11px;
+  font-size: var(--fs-label);
   letter-spacing: .15em;
   text-transform: uppercase;
   text-decoration: none;
   color: inherit;
   margin-top: 40px;
-}
-
-.reserve-inner > div:nth-child(2) {
-  width: 74%;
 }
 
 /* ─── Apprentice: formulario de solicitud ───────────────────────────────── */
@@ -96,8 +78,8 @@ textarea {
 
 .apprentice-inner {
   display: grid;
-  grid-template-columns: 1fr minmax(0, 520px);
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); /* derecha = doble que la izquierda */
+  align-items: start;
   gap: 80px;
 }
 
@@ -130,7 +112,7 @@ textarea {
   gap: 12px;
   padding: 0;
   font-family: "DM Mono", monospace;
-  font-size: 11px;
+  font-size: var(--fs-label);
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -181,7 +163,7 @@ legend.apply-label {
   padding: 8px 16px;
   border: 1px solid rgba(13, 13, 13, 0.25);
   border-radius: 999px;
-  font-size: 12px;
+  font-size: var(--fs-sm);
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -208,7 +190,7 @@ legend.apply-label {
   border: none;
   color: #f5f2ec;
   font-family: "DM Mono", monospace;
-  font-size: 11px;
+  font-size: var(--fs-label);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   cursor: pointer;
@@ -232,13 +214,12 @@ legend.apply-label {
   }
 
   .reserve-inner {
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr;
     gap: 40px;
   }
 
-  .reserve-inner > div:nth-child(2) {
-    width: 100%;
+  .reserve-link {
+    justify-self: start;
   }
 
   .widget-wrap { display: none; }

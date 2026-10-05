@@ -48,6 +48,14 @@ body.blog .links.open {
   margin-bottom: 12px;
 }
 
+/* Resumen: una sola línea a todo el ancho de la lista; si no cabe, termina en "…" */
+.post-list p {
+  max-width: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .empty {
   margin-top: 80px;
 }
@@ -59,10 +67,6 @@ body.blog .links.open {
   margin-bottom: 64px;
 }
 
-.post-header h1 {
-  font-size: clamp(48px, 8vw, 96px);
-}
-
 .post-cover {
   display: block;
   width: 100%;
@@ -70,9 +74,10 @@ body.blog .links.open {
   margin-bottom: 64px;
 }
 
+/* El texto va a 680px; las fotos pueden ocupar el ancho de la portada (900px). */
 .prose {
-  max-width: 680px;
-  font-size: 15px;
+  max-width: 900px;
+  font-size: var(--fs-body-lg);
   line-height: 1.9;
 }
 
@@ -80,20 +85,30 @@ body.blog .links.open {
   margin-top: 1.4em;
 }
 
+.prose > * {
+  max-width: 680px;
+}
+
+.prose > figure,
+.prose > .figure-pair,
+.prose > .columns {
+  max-width: 900px;
+}
+
 .prose p {
   font-size: inherit;
   opacity: 0.8;
-  max-width: none;
+  max-width: 680px;
 }
 
 .prose h2 {
-  font-size: clamp(28px, 4vw, 44px);
+  font-size: var(--fs-h3);
   margin: 2em 0 0;
 }
 
 .prose h3 {
   font-family: "DM Mono", monospace;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   margin-top: 2.4em;
@@ -106,14 +121,320 @@ body.blog .links.open {
 }
 
 .prose blockquote {
+  margin: 2.4em 0;
   border-left: 2px solid #cc1c1c;
   padding-left: 24px;
+  font-size: var(--fs-quote);
+  line-height: 1.6;
   font-style: italic;
 }
 
+.prose blockquote p {
+  opacity: 1;
+}
+
 .prose img {
+  display: block;
   max-width: 100%;
   height: auto;
+}
+
+/* ─── Columnas (texto + foto lado a lado) ───────────────────────────────── */
+
+.prose > .columns {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+  gap: 40px;
+  align-items: start;
+  margin: 2.4em 0;
+}
+
+.columns > div > * + * {
+  margin-top: 1.4em;
+}
+
+.columns figure {
+  margin: 0;
+}
+
+.columns h2 {
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .prose > .columns {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* ─── Bloques del editor de WordPress ─────────────────────────────────────── */
+/* El texto va a 680px; fotos anchas, foto + texto, columnas y galerías, a 900px. */
+
+.prose > .alignwide,
+.prose > .wp-block-media-text,
+.prose > .wp-block-columns,
+.prose > .wp-block-gallery {
+  max-width: 900px;
+}
+
+.prose > .alignfull {
+  max-width: none;
+}
+
+.prose > .wp-block-image,
+.prose > .wp-block-media-text,
+.prose > .wp-block-columns,
+.prose > .wp-block-gallery {
+  margin: 2.4em 0;
+}
+
+/* Alineación de texto */
+.prose .has-text-align-center { text-align: center; }
+.prose .has-text-align-right { text-align: right; }
+.prose .has-text-align-left { text-align: left; }
+
+/* Fotos */
+.prose .wp-block-image img {
+  width: 100%;
+}
+
+.prose .wp-block-image.aligncenter,
+.prose .wp-block-image.alignleft,
+.prose .wp-block-image.alignright {
+  max-width: 680px;
+}
+
+.prose .wp-block-image.aligncenter img,
+.prose .wp-block-image.alignleft img,
+.prose .wp-block-image.alignright img {
+  width: auto;
+  max-width: 100%;
+}
+
+.prose .wp-block-image.aligncenter {
+  text-align: center;
+}
+
+.prose .wp-block-image.aligncenter img {
+  margin: 0 auto;
+}
+
+.prose .wp-element-caption,
+.prose figcaption {
+  margin-top: 12px;
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+  opacity: 0.5;
+}
+
+/* Foto + texto */
+.prose .wp-block-media-text {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.prose .wp-block-media-text.has-media-on-the-right .wp-block-media-text__media {
+  order: 2;
+}
+
+.prose .wp-block-media-text.is-vertically-aligned-top { align-items: start; }
+.prose .wp-block-media-text.is-vertically-aligned-bottom { align-items: end; }
+
+.prose .wp-block-media-text__media {
+  margin: 0;
+}
+
+.prose .wp-block-media-text__media img {
+  width: 100%;
+}
+
+.prose .wp-block-media-text__content > * + *,
+.prose .wp-block-column > * + * {
+  margin-top: 1.4em;
+}
+
+.prose .wp-block-media-text__content > h2:first-child,
+.prose .wp-block-column > h2:first-child {
+  margin-top: 0;
+}
+
+/* Columnas */
+.prose .wp-block-columns {
+  display: flex;
+  gap: 40px;
+}
+
+.prose .wp-block-column {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.prose .wp-block-columns.are-vertically-aligned-center { align-items: center; }
+.prose .wp-block-columns.are-vertically-aligned-bottom { align-items: flex-end; }
+
+/* Galería */
+.prose .wp-block-gallery {
+  display: grid;
+  grid-template-columns: repeat(var(--gallery-cols, 3), minmax(0, 1fr));
+  gap: 16px;
+}
+
+.prose .wp-block-gallery.columns-1 { --gallery-cols: 1; }
+.prose .wp-block-gallery.columns-2 { --gallery-cols: 2; }
+.prose .wp-block-gallery.columns-4 { --gallery-cols: 4; }
+
+.prose .wp-block-gallery .wp-block-image {
+  margin: 0;
+}
+
+.prose .wp-block-gallery.is-cropped img {
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* Citas */
+.prose .wp-block-quote cite,
+.prose .wp-block-pullquote cite {
+  display: block;
+  margin-top: 12px;
+  font-size: var(--fs-label);
+  font-style: normal;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.prose .wp-block-quote.has-text-align-center,
+.prose .wp-block-pullquote {
+  border: none;
+  padding: 0;
+  text-align: center;
+}
+
+.prose .wp-block-pullquote {
+  margin: 2.4em auto;
+  font-size: var(--fs-h3);
+  line-height: 1.3;
+}
+
+.prose .wp-block-pullquote blockquote {
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Separador y botones */
+.prose hr,
+.prose .wp-block-separator {
+  border: none;
+  border-top: 1px solid rgba(13, 13, 13, 0.2);
+  margin: 3em 0;
+}
+
+.prose .wp-block-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.prose .wp-block-button__link {
+  display: inline-block;
+  padding: 12px 40px;
+  border: 1px solid currentColor;
+  font-size: var(--fs-label);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .prose .wp-block-media-text,
+  .prose .wp-block-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .prose .wp-block-media-text.has-media-on-the-right .wp-block-media-text__media {
+    order: 0;
+  }
+
+  .prose .wp-block-gallery {
+    --gallery-cols: 2;
+  }
+}
+
+/* ─── Tablas ─────────────────────────────────────────────────────────────── */
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-body);
+}
+
+.prose th,
+.prose td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(13, 13, 13, 0.15);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose th {
+  font-size: var(--fs-label);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+/* ─── Fotos ──────────────────────────────────────────────────────────────── */
+/* <figure>: foto con pie opcional. <div class="figure-pair">: dos fotos lado a lado. */
+
+.prose > figure,
+.prose > .figure-pair {
+  margin: 2.4em 0;
+}
+
+.prose figure img {
+  width: 100%;
+}
+
+.prose figcaption {
+  margin-top: 12px;
+  font-size: var(--fs-label);
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+  opacity: 0.5;
+}
+
+.figure-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.figure-pair figure {
+  margin: 0;
+}
+
+.figure-pair img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .figure-pair {
+    grid-template-columns: 1fr;
+  }
+
+  .figure-pair img {
+    aspect-ratio: auto;
+  }
 }
 
 .prose a {
@@ -124,7 +445,7 @@ body.blog .links.open {
 .back {
   display: inline-block;
   margin-top: 96px;
-  font-size: 11px;
+  font-size: var(--fs-label);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;

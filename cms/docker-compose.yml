@@ -1,0 +1,53 @@
+# WordPress local para escribir el Journal (solo para desarrollo).
+# En producción irá en el Uberspace del estudio.
+#
+#   docker compose -f cms/docker-compose.yml up -d     → arrancar (http://localhost:8080/wp-admin)
+#   docker compose -f cms/docker-compose.yml stop      → parar
+#
+# Las contraseñas salen de cms/.env (no se sube a git).
+
+services:
+  db:
+    image: mariadb:11
+    restart: "no" # solo corre cuando se arranca a mano
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_RANDOM_ROOT_PASSWORD: "1"
+    volumes:
+      - db:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:php8.3-apache
+    restart: "no" # solo corre cuando se arranca a mano
+    depends_on: [db]
+    ports:
+      - "127.0.0.1:8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - wordpress:/var/www/html
+      - ./mu-plugins:/var/www/html/wp-content/mu-plugins:ro
+
+  # Herramienta de línea de comandos de WordPress (instalar, idioma, ajustes).
+  cli:
+    image: wordpress:cli-php8.3
+    profiles: [tools]
+    user: "33:33"
+    depends_on: [db, wordpress]
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - wordpress:/var/www/html
+      - ./mu-plugins:/var/www/html/wp-content/mu-plugins:ro
+
+volumes:
+  db:
+  wordpress:

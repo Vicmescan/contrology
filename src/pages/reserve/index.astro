@@ -8,7 +8,7 @@ import '../../styles/pages.css';
   description="Book a classical Pilates apparatus session at Contrology Studio Berlin, Kreuzberg. No trial classes — first session is a full session."
   bodyClass="blog"
 >
-<main class="centered">
+<main>
   <div class="reserve-inner">
     <div>
       <small>Reserve</small>
@@ -67,6 +67,7 @@ import '../../styles/pages.css';
     /* Botones "Día anterior / Día siguiente" sin fondo */
     [data-testid="widget-container"] > [class~="@4xl:hidden"] > :last-child button {
       background: transparent !important;
+      flex: 1 1 0 !important; /* a todo el ancho, también cuando el widget es ancho */
     }
 
     /* Cursor de mano en todo lo que se puede pulsar (botones, días y clases) */

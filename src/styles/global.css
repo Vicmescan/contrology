@@ -1,3 +1,21 @@
+/* ─── Tamaños de letra ───────────────────────────────────────────────────── */
+/* Todos los tamaños de la web salen de aquí. */
+
+:root {
+  --fs-display: clamp(56px, 11vw, 120px); /* titulares de la portada */
+  --fs-h1: clamp(44px, 6vw, 80px);        /* título de cada página */
+  --fs-h2: clamp(36px, 6vw, 72px);        /* secciones de la portada, lista del Journal */
+  --fs-h3: clamp(28px, 4vw, 44px);        /* subtítulos dentro de un texto */
+  --fs-quote: 19px;                       /* citas */
+  --fs-body-lg: 15px;                     /* texto de las entradas */
+  --fs-body: 14px;                        /* texto general, campos de formulario */
+  --fs-nav-logo: clamp(14px, 1.5vw, 20px); /* logo del menú */
+  --fs-nav: 13px;                         /* enlaces del menú */
+  --fs-sm: 13px;                          /* subtítulos pequeños, opciones */
+  --fs-label: 11px;                       /* etiquetas, botones, pies de foto, footer */
+  --fs-micro: 10px;                       /* avisos mínimos */
+}
+
 /* ─── Reset ─────────────────────────────────────────────────────────────── */
 
 * {
@@ -34,9 +52,17 @@ nav {
 
 .logo {
   font-family: "Bebas Neue", sans-serif;
-  font-size: 13px;
+  font-size: var(--fs-nav-logo);
   letter-spacing: 0.2em;
   text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Móviles muy estrechos: menos espacio entre letras para que el logo quepa en una línea */
+@media (max-width: 360px) {
+  .logo {
+    letter-spacing: 0.1em;
+  }
 }
 
 .links {
@@ -47,7 +73,7 @@ nav {
 
 .links a {
   font-family: "DM Mono", monospace;
-  font-size: 11px;
+  font-size: var(--fs-nav);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   text-decoration: none;
@@ -64,7 +90,7 @@ nav {
   border: none;
   cursor: pointer;
   font-family: "DM Mono", monospace;
-  font-size: 11px;
+  font-size: var(--fs-nav);
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -73,14 +99,14 @@ nav {
 
 h1 {
   font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(56px, 11vw, 120px);
+  font-size: var(--fs-h1);
   letter-spacing: 0.03em;
   line-height: 0.9;
 }
 
 h2 {
   font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(36px, 6vw, 72px);
+  font-size: var(--fs-h2);
   letter-spacing: 0.05em;
   line-height: 1;
   margin-bottom: 24px;
@@ -88,7 +114,7 @@ h2 {
 
 p {
   font-family: "DM Mono", monospace;
-  font-size: 14px;
+  font-size: var(--fs-body);
   line-height: 1.8;
   opacity: 0.6;
   max-width: 480px;
@@ -96,7 +122,7 @@ p {
 
 small {
   font-family: "DM Mono", monospace;
-  font-size: 11px;
+  font-size: var(--fs-label);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   opacity: 0.35;
@@ -124,7 +150,7 @@ small {
 }
 
 .site-footer p {
-  font-size: 11px;
+  font-size: var(--fs-label);
   letter-spacing: 0.1em;
   line-height: 1.6;
   max-width: none;

@@ -3,11 +3,13 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
+    "dev": "node --env-file-if-exists=.env scripts/dev.mjs",
+    "sync": "node --env-file-if-exists=.env scripts/wordpress-sync.mjs",
+    "build": "npm run sync && astro build",
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^7.3.5"
+    "astro": "^7.3.5",
+    "sharp": "^0.35.5"
   }
 }
