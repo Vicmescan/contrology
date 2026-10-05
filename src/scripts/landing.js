@@ -3,7 +3,9 @@ const ctx = canvas.getContext('2d');
 const nav = document.getElementById('nav');
 const logo = document.getElementById('logo');
 const hint = document.getElementById('hint');
-const textEls = document.querySelectorAll('h1, h2, p, small, a, input, textarea, .btn-send, .menu-toggle');
+// El footer queda fuera: tiene su propio fondo crema y texto oscuro fijos.
+const textEls = [...document.querySelectorAll('h1, h2, p, small, a, input, textarea, .btn-send, .menu-toggle')]
+  .filter(el => !el.closest('.site-footer'));
 const sections = document.querySelectorAll('section');
 
 let W, H, totalH, sp = 0, tp = 0;
@@ -17,6 +19,7 @@ function resize() {
 function ease(t) { return t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
 
 window.addEventListener('scroll', () => {
+  hint.classList.toggle('hidden', window.scrollY > 10);
   const cycle = (window.scrollY / H) % 2;
   tp = cycle <= 1 ? cycle : 2 - cycle;
 }, { passive: true });

@@ -1,9 +1,17 @@
-/* Estilos de las páginas Reserve, Contact e Apprentice (mismo fondo crema que el Journal, vía blog.css). */
+/* Estilos de las páginas Reserve, Contact y Apprentice (mismo fondo crema que el Journal, vía blog.css). */
 
 /* ─── Cabecera ───────────────────────────────────────────────────────────── */
 
 main h1 + p {
   margin-top: 32px;
+}
+
+/* Contenido centrado en altura entre el menú y el footer. */
+main.centered {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* ─── Contact form ───────────────────────────────────────────────────────── */
@@ -54,7 +62,7 @@ textarea {
 .reserve-inner {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: 80px;
   width: 100%;
 }
@@ -82,11 +90,150 @@ textarea {
   width: 74%;
 }
 
+/* ─── Apprentice: formulario de solicitud ───────────────────────────────── */
+/* Panel enmarcado con preguntas numeradas, campos en caja y opciones tipo pastilla,
+   para diferenciarlo del formulario de Contact (líneas subrayadas). */
+
+.apprentice-inner {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 520px);
+  align-items: center;
+  gap: 80px;
+}
+
+.blog .apply-form {
+  max-width: none;
+  margin: 0;
+  gap: 28px;
+  padding: 48px;
+  border: 1px solid rgba(13, 13, 13, 0.15);
+}
+
+.apply-form small {
+  margin-bottom: 0;
+  opacity: 0.5;
+}
+
+.apply-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.apply-label {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 0;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.apply-num {
+  color: #cc1c1c;
+}
+
+/* El legend no respeta el gap del fieldset */
+legend.apply-label {
+  margin-bottom: 10px;
+}
+
+.apply-form input[type="text"],
+.apply-form input[type="email"],
+.apply-form textarea {
+  border: 1px solid rgba(13, 13, 13, 0.25);
+  padding: 12px 14px;
+  opacity: 1;
+  transition: border-color 0.2s ease;
+}
+
+.apply-form input:focus,
+.apply-form textarea:focus {
+  border-color: #0d0d0d;
+}
+
+.apply-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.apply-option {
+  position: relative;
+  cursor: pointer;
+}
+
+.apply-option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.apply-option span {
+  display: block;
+  padding: 8px 16px;
+  border: 1px solid rgba(13, 13, 13, 0.25);
+  border-radius: 999px;
+  font-size: 12px;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.apply-option:hover span {
+  border-color: #0d0d0d;
+}
+
+.apply-option input:checked + span {
+  background: #0d0d0d;
+  border-color: #0d0d0d;
+  color: #f5f2ec;
+}
+
+.apply-option input:focus-visible + span {
+  outline: 1px solid #cc1c1c;
+  outline-offset: 2px;
+}
+
+.apply-submit {
+  align-self: stretch;
+  margin-top: 8px;
+  padding: 16px;
+  background: #cc1c1c;
+  border: none;
+  color: #f5f2ec;
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.apply-submit:hover {
+  background: #a81616;
+}
+
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
 
 @media (max-width: 768px) {
+  .apprentice-inner {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+  .blog .apply-form {
+    padding: 32px 24px;
+  }
+
   .reserve-inner {
     flex-direction: column;
+    align-items: flex-start;
     gap: 40px;
   }
 

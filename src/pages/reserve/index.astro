@@ -8,7 +8,7 @@ import '../../styles/pages.css';
   description="Book a classical Pilates apparatus session at Contrology Studio Berlin, Kreuzberg. No trial classes — first session is a full session."
   bodyClass="blog"
 >
-<main>
+<main class="centered">
   <div class="reserve-inner">
     <div>
       <small>Reserve</small>
@@ -22,4 +22,97 @@ import '../../styles/pages.css';
     <a href="#" class="reserve-link">Reserve a session →</a>
   </div>
 </main>
+
+<script>
+  // El widget de Eversports se pinta en un shadow DOM abierto: le añadimos estilos propios
+  // para dejar solo el calendario por días con "Día anterior / Día siguiente", sobre el fondo de la web.
+  const widgetCss = `
+    * { --bg-primary: #f5f2ec !important; }
+
+    /* Pestañas Horario / Precios */
+    .overflow-x-auto.border-b,
+    /* Filtros, mes y botones de semana */
+    [data-testid="widget-container"] > :first-child,
+    /* "Nosotros utilizamos Eversports" */
+    [data-testid="widget-container"] > a,
+    /* Vista semanal (aparece cuando el widget es ancho): siempre usamos la vista por días */
+    [data-testid="widget-container"] > [class~="@4xl:flex"] {
+      display: none !important;
+    }
+
+    /* Vista por días con altura fija: días arriba, botones abajo y la lista en medio.
+       Así la página no salta cuando cambia el número de clases o mientras carga. */
+    [data-testid="widget-container"] > [class~="@4xl:hidden"] {
+      display: flex !important;
+      flex-direction: column;
+      height: 520px;
+    }
+
+    [data-testid="widget-container"] > [class~="@4xl:hidden"] > :first-child,
+    [data-testid="widget-container"] > [class~="@4xl:hidden"] > :last-child {
+      flex: none;
+    }
+
+    [data-testid="widget-container"] > [class~="@4xl:hidden"] > :last-child {
+      margin-top: auto;
+    }
+
+    [data-testid="widget-container"] > [class~="@4xl:hidden"] > :not(:first-child):not(:last-child) {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      animation: contrology-fade 0.4s ease both;
+    }
+
+    /* Botones "Día anterior / Día siguiente" sin fondo */
+    [data-testid="widget-container"] > [class~="@4xl:hidden"] > :last-child button {
+      background: transparent !important;
+    }
+
+    /* Cursor de mano en todo lo que se puede pulsar (botones, días y clases) */
+    button:not(:disabled),
+    a {
+      cursor: pointer !important;
+    }
+
+    /* Cada clase entra con un fundido al cambiar de día */
+    [data-testid="widget-container"] > [class~="@4xl:hidden"] a {
+      animation: contrology-fade 0.4s ease both;
+    }
+
+    /* Bloques grises de "cargando" */
+    [class*="animate-pulse"] {
+      visibility: hidden;
+    }
+
+    @keyframes contrology-fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    [data-testid="widget-container"] {
+      padding: 0 !important;
+      background: transparent !important;
+    }
+  `;
+
+  const host = document.querySelector('[data-eversports-widget-id]');
+  const inject = () => {
+    const root = host?.querySelector(':scope > div')?.shadowRoot;
+    if (!root) return false;
+    if (!root.querySelector('style[data-contrology]')) {
+      const style = document.createElement('style');
+      style.dataset.contrology = '';
+      style.textContent = widgetCss;
+      root.appendChild(style);
+    }
+    return true;
+  };
+
+  // El loader crea el shadow root de forma asíncrona: lo esperamos hasta 30 s.
+  let tries = 0;
+  const timer = setInterval(() => {
+    if (inject() || ++tries > 300) clearInterval(timer);
+  }, 100);
+</script>
 </Base>
