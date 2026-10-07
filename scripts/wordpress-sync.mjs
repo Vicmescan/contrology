@@ -121,7 +121,7 @@ async function main() {
 
     const frontmatter = [
       '---',
-      `slug: ${post.slug}`, // dirección de la entrada: /blog/<slug>/
+      `slug: ${post.slug}`, // dirección de la entrada: /journal/<slug>/
       `title: ${yamlString(title)}`,
       `date: ${post.date.slice(0, 10)}`,
       summary && `description: ${yamlString(summary)}`,

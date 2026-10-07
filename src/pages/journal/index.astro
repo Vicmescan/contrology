@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ReserveButton from '../../components/ReserveButton.astro';
 import '../../styles/blog.css';
 import { getPosts, formatDate } from '../../blog';
 import { url } from '../../url';
@@ -21,7 +22,7 @@ const posts = await getPosts();
     <ul class="post-list">
       {posts.map((post) => (
         <li>
-          <a href={url(`blog/${post.id}/`)}>
+          <a href={url(`journal/${post.id}/`)}>
             <small><time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time></small>
             <h2>{post.data.title}</h2>
             {post.data.description && <p>{post.data.description}</p>}
@@ -31,4 +32,6 @@ const posts = await getPosts();
     </ul>
   )}
 </main>
+
+<ReserveButton floating />
 </Base>

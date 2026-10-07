@@ -173,7 +173,9 @@ small {
 
 /* ─── Responsive ─────────────────────────────────────────────────────────── */
 
-@media (max-width: 768px) {
+/* Menú desplegable (botón MENU) por debajo de 1200px: con "Apprenticeship"
+   los enlaces ya no caben en línea junto al logo. */
+@media (max-width: 1200px) {
   .menu-toggle {
     display: block;
   }

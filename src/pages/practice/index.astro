@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import SideStripes from '../../components/SideStripes.astro';
+import '../../styles/blog.css';
+import '../../styles/practice.css';
+import { url } from '../../url';
+---
+<Base
+  title="Practice — Contrology Studio Berlin"
+  description="Classical Contrology in Kreuzberg. Group sessions and private sessions. Mat and apparatus belong to one system."
+  bodyClass="blog practice"
+>
+<SideStripes />
+
+<main>
+  <small>Practice</small>
+  <h1>Practice</h1>
+
+  <div class="def">
+    <div class="def-k">Contrology</div>
+    <p>The method developed by Joseph Pilates.</p>
+    <p>Mat and apparatus belong to one system.<br>The method is learned through practice.</p>
+  </div>
+
+  <div class="doors">
+    <a href={url('practice/contrology/')} class="door">
+      <div class="dtop"><span>01</span><span>Group</span></div>
+      <div class="dt">Contrology<br>Practice</div>
+      <div class="dbar"></div>
+      <div class="dd">Individual practice in a shared room.</div>
+      <div class="darr">&rarr;</div>
+    </a>
+
+    <!-- Private Session aún no tiene página: de momento lleva a Contact -->
+    <a href={url('contact/')} class="door">
+      <div class="dtop"><span>02</span><span>Private</span></div>
+      <div class="dt">Private<br>Session</div>
+      <div class="dbar"></div>
+      <div class="dd">One-to-one practice.</div>
+      <div class="darr">&rarr;</div>
+    </a>
+  </div>
+</main>
+</Base>

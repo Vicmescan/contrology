@@ -1,0 +1,125 @@
+---
+// Botón circular "Reserve session →" que abre Eversports en otra pestaña.
+// - Normal: dentro de la página (bloque "Reserve your place." de Contrology Practice).
+// - floating: fijo abajo a la derecha, con latido, y se aparta al llegar al footer
+//   (portada y Journal).
+interface Props {
+  floating?: boolean;
+}
+
+const { floating = false } = Astro.props;
+const EVERSPORTS = 'https://www.eversports.de/s/contrology-studio-berlin';
+---
+<a
+  href={EVERSPORTS}
+  target="_blank"
+  rel="noopener"
+  class:list={['reserve-circle', { floating }]}
+  data-reserve-floating={floating ? '' : undefined}
+>
+  <span>Reserve</span><span>Session &rarr;</span>
+</a>
+
+<script>
+  // El botón flotante se aparta cuando aparece el footer, para no tapar sus enlaces.
+  const cta = document.querySelector('[data-reserve-floating]');
+  const footer = document.querySelector('.site-footer');
+  if (cta && footer) {
+    new IntersectionObserver(([entry]) => cta.classList.toggle('hidden', entry.isIntersecting)).observe(footer);
+  }
+</script>
+
+<style>
+  .reserve-circle {
+    --size: 158px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background: #cc1c1c;
+    color: #f5f2ec;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: background 0.3s, transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .reserve-circle span {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: var(--fs-quote);
+    letter-spacing: 0.1em;
+  }
+
+  .reserve-circle:hover {
+    background: #a81616;
+  }
+
+  /* ── Flotante ── */
+  .floating {
+    --size: 132px;
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    z-index: 997;
+    /* Latido cada 6 s: crece un poco y suelta un halo rojo */
+    animation: reserve-beat 6s ease-in-out 3s infinite;
+  }
+
+  .floating::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid #cc1c1c;
+    opacity: 0;
+    pointer-events: none;
+    animation: reserve-halo 6s ease-out 3s infinite;
+  }
+
+  .floating:hover,
+  .floating:hover::after,
+  .floating.hidden,
+  .floating.hidden::after {
+    animation: none;
+  }
+
+  .floating.hidden {
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+  }
+
+  @keyframes reserve-beat {
+    0%, 8%, 100% { scale: 1; }
+    4% { scale: 1.06; }
+  }
+
+  @keyframes reserve-halo {
+    0% { opacity: 0; inset: 0; }
+    3% { opacity: 0.8; inset: 0; }
+    14%, 100% { opacity: 0; inset: -16px; }
+  }
+
+  /* Sin latido para quien prefiere menos movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    .floating,
+    .floating::after {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .floating {
+      --size: 104px;
+      right: 16px;
+      bottom: 16px;
+    }
+
+    .floating span {
+      font-size: var(--fs-body);
+    }
+  }
+</style>

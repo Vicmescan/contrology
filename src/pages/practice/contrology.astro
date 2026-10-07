@@ -1,0 +1,61 @@
+---
+import Base from '../../layouts/Base.astro';
+import ReserveButton from '../../components/ReserveButton.astro';
+import '../../styles/practice.css';
+import '../../styles/landing.css';
+import { url } from '../../url';
+
+const apparatus = ['Mat', 'Reformer', 'Wunda Chair', 'Cadillac', 'And others'];
+---
+<Base
+  title="Contrology Practice — Contrology Studio Berlin"
+  description="Contrology Practice in Kreuzberg. Individual practice in a shared room, up to 8 people, 45 minutes. Mat, Reformer, Wunda Chair and Cadillac."
+  bodyClass="practice screens"
+>
+<!-- Fondo animado de lamas, igual que la portada -->
+<canvas id="c"></canvas>
+
+<div class="hint" id="hint">scroll ↓</div>
+
+<!-- PANTALLA 1: qué es -->
+<section class="screen-1">
+  <small class="crumb"><a href={url('practice/')}>Practice</a> &nbsp;/&nbsp; Contrology Practice</small>
+
+  <h1>Contrology<br>Practice</h1>
+
+  <div class="lead">Individual practice in a shared room.</div>
+
+  <div class="spec">
+    <div>45 Minutes</div>
+    <div>Up to 8 people</div>
+    <div>Kreuzberg</div>
+  </div>
+
+  <div class="body">
+    <p>Each person follows their own sequence within the system.</p>
+    <p>The teacher observes and intervenes when needed. With repetition, the order becomes familiar and the practice becomes increasingly autonomous.</p>
+  </div>
+</section>
+
+<!-- PANTALLA 2: aparatos y reserva -->
+<section class="screen-2">
+  <div class="app">
+    <small>Apparatus used according to the practice</small>
+    <div class="app-l">
+      {apparatus.map((item) => <span>{item}</span>)}
+    </div>
+  </div>
+
+  <div class="res">
+    <div>
+      <small>Schedule &amp; booking</small>
+      <div class="rt">Reserve your place.</div>
+    </div>
+    <ReserveButton />
+  </div>
+</section>
+
+<script>
+  import '../../scripts/landing.js';
+</script>
+</Base>

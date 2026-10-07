@@ -12,7 +12,7 @@ if (!defined('CONTROLOGY_SITE_URL')) {
 }
 
 function contrology_post_url($post) {
-	return trailingslashit(CONTROLOGY_SITE_URL) . 'blog/' . $post->post_name . '/';
+	return trailingslashit(CONTROLOGY_SITE_URL) . 'journal/' . $post->post_name . '/';
 }
 
 // "Ver entrada" y los enlaces permanentes apuntan a la entrada en la web.

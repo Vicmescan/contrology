@@ -1,11 +1,14 @@
+import { drawSlats } from './slats.js';
+
 const canvas = document.getElementById('c');
 const ctx = canvas.getContext('2d');
 const nav = document.getElementById('nav');
 const logo = document.getElementById('logo');
 const hint = document.getElementById('hint');
-// El footer queda fuera: tiene su propio fondo crema y texto oscuro fijos.
+// El footer y el botón de reservar quedan fuera: tienen sus propios colores fijos.
 const textEls = [...document.querySelectorAll('h1, h2, p, small, a, input, textarea, .btn-send, .menu-toggle')]
-  .filter(el => !el.closest('.site-footer'));
+  .filter(el => !el.closest('.site-footer, .reserve-circle'));
+
 const sections = document.querySelectorAll('section');
 
 let W, H, totalH, sp = 0, tp = 0;
@@ -28,32 +31,7 @@ function draw() {
   sp += (tp - sp) * 0.07;
   const p = ease(sp);
 
-  ctx.clearRect(0, 0, W, H);
-
-  ctx.fillStyle = '#F5F2EC';
-  ctx.fillRect(0, 0, W, H);
-
-  const slatH = 9 - p * 6;
-  const gapH = p * slatH * 9;
-  const repeat = slatH + gapH;
-  const drift = repeat > 1 ? (window.scrollY * 0.06) % repeat : 0;
-  let y = -repeat + drift;
-
-  while (y < H + repeat) {
-    const midY = y + slatH * 0.5;
-    ctx.beginPath();
-    ctx.ellipse(W * .5, midY, W * .54, slatH * .58 + .5, 0, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(13,13,13,${0.97 - p * .1})`;
-    ctx.fill();
-    if (p > .2 && gapH > 2) {
-      const hl = (p - .2) * .28;
-      ctx.beginPath();
-      ctx.ellipse(W * .5, midY - slatH * .22, W * .54, slatH * .18, 0, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(245,242,236,${hl})`;
-      ctx.fill();
-    }
-    y += repeat;
-  }
+  drawSlats(ctx, W, H, p, window.scrollY * 0.06);
 
   const vw = W * .05;
   const vAlpha = p * .5;
@@ -71,6 +49,10 @@ function draw() {
 
   const col = p < .5 ? '#F5F2EC' : '#0D0D0D';
   textEls.forEach(el => { if (!el.classList.contains('red')) el.style.color = col; });
+  // Color del texto para el resto de elementos (bordes, fichas…) que lo usan vía CSS.
+  document.documentElement.style.setProperty('--fg', col);
+  // Fondo del menú desplegable: el contrario del texto, para que se lea sobre la animación.
+  document.documentElement.style.setProperty('--nav-bg', p < .5 ? '#0D0D0D' : '#F5F2EC');
 
   const bgAlpha = Math.max(0, (p - 0.5) * 2);
   sections.forEach(s => { s.style.background = `rgba(245,242,236,${bgAlpha})`; });

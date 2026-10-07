@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import ReserveButton from '../../components/ReserveButton.astro';
 import '../../styles/blog.css';
 import { getPosts, formatDate } from '../../blog';
 import { url } from '../../url';
@@ -33,6 +34,8 @@ const { Content } = await render(post);
     </div>
   </article>
 
-  <a class="back" href={url('blog/')}>← All entries</a>
+  <a class="back" href={url('journal/')}>← All entries</a>
 </main>
+
+<ReserveButton floating />
 </Base>

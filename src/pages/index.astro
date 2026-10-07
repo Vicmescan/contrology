@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import ReserveButton from '../components/ReserveButton.astro';
 import '../styles/landing.css';
 
 const jsonLd = {
@@ -36,6 +37,7 @@ const jsonLd = {
 };
 ---
 <Base
+  bodyClass="home"
   title="Contrology Studio Berlin — Classical Pilates Kreuzberg"
   description="Classical Pilates apparatus studio in Kreuzberg, Berlin. Small groups, progressive sequence. Not a workout — a practice."
 >
@@ -47,6 +49,9 @@ const jsonLd = {
 <canvas id="c"></canvas>
 
 <div class="hint" id="hint">scroll ↓</div>
+
+<!-- Botón fijo para reservar: siempre a mano mientras se recorre la portada -->
+<ReserveButton floating />
 
 <!-- HERO -->
 <section>

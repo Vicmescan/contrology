@@ -1,0 +1,286 @@
+/* ===========================================================
+   SECCIÓN PRACTICE
+   Contenido y estructura de la entrega de diseño (contrology-web),
+   con las tipografías de la web (Bebas Neue y DM Mono) sobre fondo negro.
+   Los laterales son las franjas de la portada (componente SideStripes).
+   =========================================================== */
+
+.practice {
+  --line: rgba(245, 242, 236, 0.2);
+}
+
+/* Fondo negro y texto crema */
+body.blog.practice {
+  background: #0d0d0d;
+  color: #f5f2ec;
+}
+
+/* Menú y footer como en la portada: menú transparente con letras crema
+   (desplegable en negro) y footer crema con texto negro. */
+body.blog.practice nav {
+  background: transparent;
+}
+
+body.blog.practice .links.open {
+  background: #0d0d0d;
+}
+
+body.blog.practice .menu-toggle {
+  color: #f5f2ec;
+}
+
+body.blog.practice .site-footer {
+  color: #0d0d0d;
+}
+
+.practice main {
+  position: relative;
+  z-index: 5;
+}
+
+/* ── Miga de pan (Contrology Practice) ── */
+.practice .crumb a {
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+.practice .crumb a:hover {
+  opacity: 1;
+}
+
+/* ── Frase de entrada y definición ── */
+.practice .lead,
+.practice .def-k {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: var(--fs-h3);
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+}
+
+.practice h1 + .lead,
+.practice h1 + .def {
+  margin-top: 32px;
+}
+
+.practice .lead {
+  margin-bottom: 40px;
+}
+
+.practice .def {
+  max-width: 600px;
+  margin-bottom: 96px;
+}
+
+.practice .def-k {
+  margin-bottom: 16px;
+}
+
+.practice .def p,
+.practice .body p {
+  max-width: 600px;
+  line-height: 2;
+}
+
+.practice .def p + p,
+.practice .body p + p {
+  margin-top: 16px;
+}
+
+/* ── Ficha técnica ── */
+.practice .spec {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  margin-bottom: 56px;
+}
+
+.practice .spec div {
+  padding: 13px 24px;
+  font-size: var(--fs-label);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-right: 1px solid var(--line);
+}
+
+.practice .spec div:last-child {
+  border-right: none;
+}
+
+/* ── Puertas ── */
+.practice .doors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.practice .door {
+  min-height: 380px;
+  padding: 36px;
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: background 0.35s, color 0.35s, border-color 0.35s;
+}
+
+.practice .door:hover {
+  background: #f5f2ec;
+  color: #0d0d0d;
+  border-color: #f5f2ec;
+}
+
+.practice .dtop {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-label);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: auto;
+}
+
+.practice .door:hover .dtop {
+  opacity: 0.6;
+}
+
+.practice .dt {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: var(--fs-h3);
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  margin-top: 60px;
+}
+
+.practice .dbar {
+  width: 34px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+  margin: 22px 0 18px;
+}
+
+.practice .dd {
+  font-size: var(--fs-sm);
+  line-height: 1.9;
+  opacity: 0.65;
+  margin-bottom: 30px;
+}
+
+.practice .darr {
+  font-size: var(--fs-h3);
+  line-height: 1;
+  transition: transform 0.35s;
+  display: inline-block;
+}
+
+.practice .door:hover .darr {
+  transform: translateX(14px);
+}
+
+/* ── Lista de aparatos ── */
+.practice .app {
+  margin: 72px 0;
+  padding-top: 34px;
+  border-top: 1px solid var(--line);
+}
+
+.practice .app-l {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.practice .app-l span {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: var(--fs-h3);
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  padding-right: 22px;
+  margin-right: 22px;
+  border-right: 1px solid var(--line);
+  margin-bottom: 12px;
+}
+
+.practice .app-l span:last-child {
+  border-right: none;
+  padding-right: 0;
+  margin-right: 0;
+}
+
+/* ── Bloque de reserva ── */
+.practice .res {
+  border-top: 1px solid var(--line);
+  padding-top: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.practice .res small {
+  margin-bottom: 14px;
+}
+
+.practice .rt {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: var(--fs-h2);
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+/* ===========================================================
+   MÓVIL
+   =========================================================== */
+@media (max-width: 900px) {
+  .practice .def { margin-bottom: 60px; }
+  .practice .doors { grid-template-columns: 1fr; }
+  .practice .door { min-height: auto; padding: 30px; }
+  .practice .dt { margin-top: 40px; }
+  .practice .spec { display: flex; flex-direction: column; width: 100%; }
+  .practice .spec div { border-right: none; border-bottom: 1px solid var(--line); }
+  .practice .spec div:last-child { border-bottom: none; }
+  .practice .res { flex-direction: column; align-items: flex-start; }
+}
+
+/* ===========================================================
+   CONTROLOGY PRACTICE EN DOS PANTALLAS
+   Mismo fondo animado que la portada (landing.css + landing.js):
+   pantalla 1 oscura, pantalla 2 clara. El color del texto lo pone
+   landing.js en --fg y sigue a la animación.
+   =========================================================== */
+
+.screens section {
+  --line: color-mix(in srgb, var(--fg, #f5f2ec) 22%, transparent);
+  color: var(--fg, #f5f2ec);
+  height: auto;
+  min-height: 100vh;
+}
+
+/* Pantalla 1: el título a la misma altura que en el resto de páginas */
+.screens .screen-1 {
+  justify-content: flex-start;
+  padding-top: 140px;
+}
+
+/* Pantalla 2: contenido centrado en la pantalla */
+.screens .screen-2 {
+  justify-content: center;
+}
+
+.screens .screen-2 .app {
+  margin-top: 0;
+}
+
+.screens .body {
+  margin-bottom: 0;
+}
+
+/* Las secciones son columnas flex: la ficha no debe estirarse a todo el ancho */
+.screens .spec {
+  align-self: flex-start;
+}
+
+@media (max-width: 900px) {
+  .screens section {
+    padding-bottom: 40px;
+  }
+}
