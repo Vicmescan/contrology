@@ -294,6 +294,39 @@ body.blog.practice .site-footer {
   margin-bottom: 0;
 }
 
+/* Contrology Practice, pantalla 2: aparatos y texto a la izquierda, calendario a la derecha
+   (el doble de ancho) */
+.practice .booking {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 80px;
+  align-items: start;
+}
+
+.practice .booking small {
+  margin-bottom: 14px;
+}
+
+.practice .booking .app {
+  margin: 0 0 56px;
+  padding-top: 0;
+  border-top: none;
+}
+
+.practice .booking .app small {
+  margin-bottom: 20px;
+}
+
+/* Columna izquierda estrecha: titulares más contenidos para que todo quepa junto al calendario */
+.practice .booking .app-l span {
+  font-size: var(--fs-h4);
+  margin-bottom: 8px;
+}
+
+.practice .booking .rt {
+  font-size: var(--fs-h3);
+}
+
 /* Las secciones son columnas flex: la ficha no debe estirarse a todo el ancho */
 .screens .spec {
   align-self: flex-start;
@@ -303,4 +336,18 @@ body.blog.practice .site-footer {
   .screens section {
     padding-bottom: 40px;
   }
+
+  .practice .booking {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .screens .screen-2 {
+    padding-top: 96px;
+  }
+
+  .practice .booking .app {
+    margin-bottom: 36px;
+  }
+
 }

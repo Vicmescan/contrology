@@ -6,6 +6,7 @@
   --fs-h1: clamp(44px, 6vw, 80px);        /* título de cada página */
   --fs-h2: clamp(36px, 6vw, 72px);        /* secciones de la portada, lista del Journal */
   --fs-h3: clamp(28px, 4vw, 44px);        /* subtítulos dentro de un texto */
+  --fs-h4: clamp(22px, 2.4vw, 30px);      /* titulares en columnas estrechas */
   --fs-quote: 19px;                       /* citas */
   --fs-body-lg: 15px;                     /* texto de las entradas */
   --fs-body: 14px;                        /* texto general, campos de formulario */

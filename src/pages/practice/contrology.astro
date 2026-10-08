@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import ReserveButton from '../../components/ReserveButton.astro';
+import EversportsCalendar from '../../components/EversportsCalendar.astro';
 import '../../styles/practice.css';
 import '../../styles/landing.css';
 import { url } from '../../url';
@@ -16,8 +16,6 @@ const apparatus = ['Mat', 'Reformer', 'Wunda Chair', 'Cadillac', 'And others'];
 <canvas id="c" data-theme="dark"></canvas>
 
 <div class="hint" id="hint">scroll ↓</div>
-
-<ReserveButton floating />
 
 <!-- PANTALLA 1: qué es -->
 <section class="screen-1">
@@ -39,20 +37,21 @@ const apparatus = ['Mat', 'Reformer', 'Wunda Chair', 'Cadillac', 'And others'];
   </div>
 </section>
 
-<!-- PANTALLA 2: aparatos y reserva -->
+<!-- PANTALLA 2: aparatos y calendario de Eversports -->
 <section class="screen-2">
-  <div class="app">
-    <small>Apparatus used according to the practice</small>
-    <div class="app-l">
-      {apparatus.map((item) => <span>{item}</span>)}
-    </div>
-  </div>
-
-  <div class="res">
+  <div class="booking">
     <div>
+      <div class="app">
+        <small>Apparatus used according to the practice</small>
+        <div class="app-l">
+          {apparatus.map((item) => <span>{item}</span>)}
+        </div>
+      </div>
+
       <small>Schedule &amp; booking</small>
       <div class="rt">Reserve your place.</div>
     </div>
+    <EversportsCalendar dark />
   </div>
 </section>
 
