@@ -227,6 +227,25 @@ body.blog.practice .site-footer {
   line-height: 1;
 }
 
+/* ── Enlace dentro del texto ── */
+.practice .inl {
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 1px;
+}
+
+/* ── Contacto bajo el bloque de reserva (Private Session) ── */
+.practice .rsub {
+  margin-top: 18px;
+  font-size: var(--fs-label);
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+}
+
+.practice .rsub a {
+  text-decoration: none;
+}
+
 /* ===========================================================
    MÓVIL
    =========================================================== */
@@ -259,6 +278,7 @@ body.blog.practice .site-footer {
 .screens .screen-1 {
   justify-content: flex-start;
   padding-top: 140px;
+  padding-bottom: 48px;
 }
 
 /* Pantalla 2: contenido centrado en la pantalla */

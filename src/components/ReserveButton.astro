@@ -1,23 +1,28 @@
 ---
-// Botón circular "Reserve session →" que abre Eversports en otra pestaña.
-// - Normal: dentro de la página (bloque "Reserve your place." de Contrology Practice).
+// Botón circular rojo. Por defecto, "Reserve session →" y abre Eversports en otra pestaña.
+// - Normal: dentro de la página (bloque de reserva de Contrology Practice).
 // - floating: fijo abajo a la derecha, con latido, y se aparta al llegar al footer
 //   (portada y Journal).
+// - href / lines: otro destino y otro texto (p. ej. Private Session: "Write / to arrange →").
 interface Props {
   floating?: boolean;
+  href?: string;
+  lines?: [string, string];
 }
 
-const { floating = false } = Astro.props;
 const EVERSPORTS = 'https://www.eversports.de/s/contrology-studio-berlin';
+const { floating = false, href = EVERSPORTS, lines = ['Reserve', 'Session'] } = Astro.props;
+// Enlaces externos y correo, en otra pestaña.
+const external = href.startsWith('http') || href.startsWith('mailto:');
 ---
 <a
-  href={EVERSPORTS}
-  target="_blank"
-  rel="noopener"
+  href={href}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
   class:list={['reserve-circle', { floating }]}
   data-reserve-floating={floating ? '' : undefined}
 >
-  <span>Reserve</span><span>Session &rarr;</span>
+  <span>{lines[0]}</span><span>{lines[1]} &rarr;</span>
 </a>
 
 <script>
@@ -25,7 +30,11 @@ const EVERSPORTS = 'https://www.eversports.de/s/contrology-studio-berlin';
   const cta = document.querySelector('[data-reserve-floating]');
   const footer = document.querySelector('.site-footer');
   if (cta && footer) {
-    new IntersectionObserver(([entry]) => cta.classList.toggle('hidden', entry.isIntersecting)).observe(footer);
+    // Solo cuando el footer ya ha entrado unos píxeles: si solo roza el borde de la ventana
+    // (al final de una pantalla completa) el botón sigue visible.
+    new IntersectionObserver(([entry]) => cta.classList.toggle('hidden', entry.isIntersecting), {
+      rootMargin: '0px 0px -40px 0px',
+    }).observe(footer);
   }
 </script>
 

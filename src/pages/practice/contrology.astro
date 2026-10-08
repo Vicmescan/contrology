@@ -12,10 +12,12 @@ const apparatus = ['Mat', 'Reformer', 'Wunda Chair', 'Cadillac', 'And others'];
   description="Contrology Practice in Kreuzberg. Individual practice in a shared room, up to 8 people, 45 minutes. Mat, Reformer, Wunda Chair and Cadillac."
   bodyClass="practice screens"
 >
-<!-- Fondo animado de lamas, igual que la portada -->
-<canvas id="c"></canvas>
+<!-- Fondo animado de lamas, como la portada pero siempre en oscuro -->
+<canvas id="c" data-theme="dark"></canvas>
 
 <div class="hint" id="hint">scroll ↓</div>
+
+<ReserveButton floating />
 
 <!-- PANTALLA 1: qué es -->
 <section class="screen-1">
@@ -51,7 +53,6 @@ const apparatus = ['Mat', 'Reformer', 'Wunda Chair', 'Cadillac', 'And others'];
       <small>Schedule &amp; booking</small>
       <div class="rt">Reserve your place.</div>
     </div>
-    <ReserveButton />
   </div>
 </section>
 

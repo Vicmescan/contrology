@@ -10,6 +10,9 @@ const textEls = [...document.querySelectorAll('h1, h2, p, small, a, input, texta
   .filter(el => !el.closest('.site-footer, .reserve-circle'));
 
 const sections = document.querySelectorAll('section');
+// Modo oscuro (data-theme="dark" en el canvas): las lamas se mueven igual, pero la página
+// no pasa a clara (Contrology Practice y Private Session).
+const dark = canvas.dataset.theme === 'dark';
 
 let W, H, totalH, sp = 0, tp = 0;
 
@@ -21,9 +24,14 @@ function resize() {
 
 function ease(t) { return t < .5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
 
+// Cada cuánto alterna la animación. Portada: una pantalla (oscura, clara, oscura…).
+// Modo oscuro: media pantalla, así las lamas se abren a mitad del paso y se cierran al llegar,
+// y todas las pantallas quedan como la primera (negro con los muelles de los lados).
+const period = () => (dark ? H / 2 : H);
+
 window.addEventListener('scroll', () => {
   hint.classList.toggle('hidden', window.scrollY > 10);
-  const cycle = (window.scrollY / H) % 2;
+  const cycle = (window.scrollY / period()) % 2;
   tp = cycle <= 1 ? cycle : 2 - cycle;
 }, { passive: true });
 
@@ -31,7 +39,7 @@ function draw() {
   sp += (tp - sp) * 0.07;
   const p = ease(sp);
 
-  drawSlats(ctx, W, H, p, window.scrollY * 0.06);
+  drawSlats(ctx, W, H, p, window.scrollY * 0.06, { dark });
 
   const vw = W * .05;
   const vAlpha = p * .5;
@@ -47,14 +55,17 @@ function draw() {
   ctx.fillStyle = rg;
   ctx.fillRect(W - vw, 0, vw, H);
 
-  const col = p < .5 ? '#F5F2EC' : '#0D0D0D';
+  // En modo oscuro el texto se queda siempre en crema.
+  const col = dark || p < .5 ? '#F5F2EC' : '#0D0D0D';
   textEls.forEach(el => { if (!el.classList.contains('red')) el.style.color = col; });
   // Color del texto para el resto de elementos (bordes, fichas…) que lo usan vía CSS.
   document.documentElement.style.setProperty('--fg', col);
   // Fondo del menú desplegable: el contrario del texto, para que se lea sobre la animación.
-  document.documentElement.style.setProperty('--nav-bg', p < .5 ? '#0D0D0D' : '#F5F2EC');
+  document.documentElement.style.setProperty('--nav-bg', col === '#F5F2EC' ? '#0D0D0D' : '#F5F2EC');
 
-  const bgAlpha = Math.max(0, (p - 0.5) * 2);
+  // Portada: al acercarse a la fase abierta, cada pantalla se cubre de crema liso.
+  // En modo oscuro no se cubre nada, para que se vean los muelles de los lados.
+  const bgAlpha = dark ? 0 : Math.max(0, (p - 0.5) * 2);
   sections.forEach(s => { s.style.background = `rgba(245,242,236,${bgAlpha})`; });
 
   requestAnimationFrame(draw);

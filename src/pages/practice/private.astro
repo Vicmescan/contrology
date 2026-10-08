@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import ReserveButton from '../../components/ReserveButton.astro';
+import '../../styles/practice.css';
+import '../../styles/landing.css';
+import { url } from '../../url';
+
+const apparatus = ['Mat', 'Reformer', 'Wunda Chair', 'Cadillac', 'And others'];
+---
+<Base
+  title="Private Session — Contrology Studio Berlin"
+  description="Private Pilates in Kreuzberg, Berlin. One-to-one Contrology, 45 minutes, full apparatus. Not a prerequisite for group practice."
+  bodyClass="practice screens"
+>
+<canvas id="c" data-theme="dark"></canvas>
+
+<div class="hint" id="hint">scroll ↓</div>
+
+<ReserveButton
+  floating
+  href="mailto:pep@contrologystudio.berlin?subject=Private%20Session"
+  lines={['Write', 'To arrange']}
+/>
+
+<section class="screen-1">
+  <small class="crumb"><a href={url('practice/')}>Practice</a> &nbsp;/&nbsp; Private Session</small>
+
+  <h1>Private<br>Session</h1>
+
+  <div class="lead">Accelerates learning.<br>Does not replace practice.</div>
+
+  <div class="spec">
+    <div>45 Minutes</div>
+    <div>One to one</div>
+  </div>
+
+  <div class="body">
+    <p>The same system. The same order. One body.</p>
+    <p>Chosen when returning after an interruption, working around a limitation, or going deeper into the order.</p>
+    <p>Not a prerequisite. Anyone can begin in <a href={url('practice/contrology/')} class="inl">Contrology Practice</a>.</p>
+  </div>
+</section>
+
+<section class="screen-2">
+  <div class="app">
+    <small>Apparatus used according to the practice</small>
+    <div class="app-l">
+      {apparatus.map((item) => <span>{item}</span>)}
+    </div>
+  </div>
+
+  <div class="res">
+    <div>
+      <small>Availability</small>
+      <div class="rt">Private sessions are<br>arranged directly.</div>
+      <p class="rsub">
+        <a href="mailto:pep@contrologystudio.berlin" target="_blank" rel="noopener">pep@contrologystudio.berlin</a><br>
+        <a href="tel:+491757799559">+49 175 779 9559</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../../scripts/landing.js';
+</script>
+</Base>
